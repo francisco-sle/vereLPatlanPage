@@ -70,7 +70,7 @@ export function ProjectCard({ project, category, index }: Props) {
             <span className={frameClass}>
               <img
                 src={project.image.thumb}
-                alt=""
+                alt={`${name} · ${l(category.name)}`}
                 loading="lazy"
                 decoding="async"
                 draggable={false}
