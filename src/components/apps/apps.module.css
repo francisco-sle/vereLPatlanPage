@@ -1,0 +1,280 @@
+/* ---------- Shared bodies ---------- */
+
+.centeredBody {
+  display: grid;
+  align-items: center;
+}
+
+.photoBody {
+  overflow: hidden;
+  background: var(--ink-soft);
+}
+
+.viewerBody {
+  overflow: hidden;
+  background: var(--white);
+}
+
+/* ---------- Profile ---------- */
+
+.profilePhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  user-select: none;
+}
+
+/* ---------- About ---------- */
+
+.about {
+  display: grid;
+  gap: 0.9em;
+  padding: clamp(16px, 4%, 28px);
+  font-size: var(--text-md);
+  line-height: 1.75;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  background: var(--accent);
+  animation: blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* ---------- Skills ---------- */
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 22px 26px;
+  padding: clamp(14px, 4%, 28px);
+}
+
+.skill {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.skillIcon {
+  flex-shrink: 0;
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.skill:hover .skillIcon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.skillInfo {
+  display: grid;
+  flex: 1;
+  gap: 8px;
+  min-width: 0;
+}
+
+.skillName {
+  font-size: var(--text-sm);
+}
+
+/* ---------- Favorites ---------- */
+
+.favorites {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.favorite {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  border: var(--border);
+  border-radius: 10px;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.favorite:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.favoriteOpen {
+  display: flex;
+  flex: 1;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+  padding: 8px;
+  text-align: left;
+}
+
+.favoriteOpen img {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+}
+
+.favoriteOpen span {
+  display: grid;
+  min-width: 0;
+}
+
+.favoriteOpen strong {
+  overflow: hidden;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.favoriteOpen small {
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+}
+
+.favoriteRemove {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  font-size: 22px;
+  color: var(--accent);
+  border-radius: var(--radius-sm);
+  transition: transform var(--dur-fast) var(--ease-spring);
+}
+
+.favoriteRemove:hover {
+  transform: scale(1.15) rotate(10deg);
+}
+
+.empty {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  padding: 32px 24px;
+  font-size: var(--text-sm);
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+.emptyIcon {
+  font-size: 44px;
+  color: var(--accent);
+  animation: float 3.5s ease-in-out infinite;
+}
+
+.emptyTitle {
+  font-size: var(--text-lg);
+  color: var(--ink);
+}
+
+/* ---------- Viewer ---------- */
+
+.viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.viewerStage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Absolutely positioned so the image always fits the stage, whatever its size. */
+.viewerImage {
+  position: absolute;
+  inset: 14px;
+  width: calc(100% - 28px);
+  height: calc(100% - 28px);
+  object-fit: contain;
+  user-select: none;
+}
+
+.viewerPreview {
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+.viewerBar {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 6px;
+  background: var(--paper);
+  border-top: var(--border);
+}
+
+.viewerInfo {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  padding: 0 6px;
+  text-align: center;
+}
+
+.viewerInfo strong {
+  overflow: hidden;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.viewerInfo small {
+  overflow: hidden;
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.iconButton {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  font-size: 20px;
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--dur-fast),
+    transform var(--dur-fast) var(--ease-spring);
+}
+
+.iconButton:hover {
+  background: var(--ink-faint);
+}
+
+.iconButton:active {
+  transform: scale(0.88);
+}
+
+.starred {
+  color: var(--accent);
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-6px);
+  }
+}

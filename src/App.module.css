@@ -1,0 +1,23 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.skipLink {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 20000;
+  padding: 8px 14px;
+  color: var(--white);
+  background: var(--ink);
+  border-radius: var(--radius-pill);
+  transform: translateY(-200%);
+  transition: transform var(--dur-fast);
+}
+
+.skipLink:focus-visible {
+  transform: none;
+}

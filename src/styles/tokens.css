@@ -1,0 +1,57 @@
+:root {
+  /* Palette (from the Figma design) */
+  --ink: #361dc7;
+  --ink-strong: #2a14a8;
+  --ink-soft: #6a5ae6;
+  --ink-muted: rgb(54 29 199 / 0.68);
+  --ink-faint: rgb(54 29 199 / 0.12);
+  --desk-top: #8b84ff;
+  --desk-bottom: #aea6ff;
+  --grid-line: rgb(232 236 255 / 0.3);
+  --pink: #ffc6fb;
+  --pink-strong: #fcaef6;
+  --pink-tab: #d6a4dc;
+  --blue: #aed4ff;
+  --blue-strong: #94c4fd;
+  --paper: #f6f5fb;
+  --white: #f7f6ff;
+  --accent: #ff71f5;
+  --accent-soft: #ffd9fc;
+  --taskbar: #3a1fc6;
+  --folder: #b7cfff;
+
+  /* Type */
+  --font: "Fira Code Variable", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.9375rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.3rem;
+
+  /* Shape & depth */
+  --border-width: 2px;
+  --border: var(--border-width) solid var(--ink);
+  --radius-sm: 6px;
+  --radius-pill: 999px;
+  --shadow-hard: 6px 6px 0 rgb(42 20 168 / 0.2);
+  --shadow-hard-strong: 9px 9px 0 rgb(42 20 168 / 0.26);
+  --shadow-soft: 0 22px 44px -18px rgb(42 20 168 / 0.55);
+  --shadow-pop: 0 14px 34px -10px rgb(42 20 168 / 0.5);
+
+  /* Layout */
+  --taskbar-h: 72px;
+  --gutter: 16px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 0.15s;
+  --dur-med: 0.28s;
+}
+
+@media (max-width: 760px), (max-height: 520px) {
+  :root {
+    --taskbar-h: 60px;
+    --text-xl: 1.1rem;
+  }
+}

@@ -1,0 +1,20 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 10px;
+  background: var(--blue);
+  border: var(--border);
+  box-shadow: var(--shadow-hard);
+}
+
+.title {
+  padding: 10px 4px;
+  font-size: var(--text-lg);
+  font-weight: 450;
+}
+
+.body {
+  overflow: hidden;
+  background: var(--paper);
+  border: var(--border);
+}

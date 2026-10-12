@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Vercel
+.vercel
+
+# Original artwork & Figma exports (optimized copies live in src/assets/images)
+Images/

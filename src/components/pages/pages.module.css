@@ -1,0 +1,139 @@
+/* ---------- Home ---------- */
+
+.home {
+  display: grid;
+  min-height: 100%;
+  padding: clamp(12px, 3%, 32px);
+  place-items: center;
+}
+
+.heroWrap {
+  width: min(100%, 720px);
+}
+
+.hero {
+  width: 100%;
+  height: auto;
+  user-select: none;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-10px) rotate(-0.5deg);
+  }
+}
+
+.inlinePanels {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+.profilePanel img {
+  max-height: 60vh;
+}
+
+/* ---------- Curriculum ---------- */
+
+.curriculum {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(24px, 6%, 72px);
+  max-width: 1040px;
+  padding: clamp(18px, 4%, 44px) clamp(16px, 5%, 56px);
+  margin: 0 auto;
+}
+
+.cvColumn {
+  display: grid;
+  gap: 30px;
+  align-content: start;
+}
+
+/* Dashed divider between the columns, as in the design. */
+.cvColumn + .cvColumn {
+  position: relative;
+}
+
+.cvColumn + .cvColumn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(clamp(24px, 6%, 72px) / -2 - 1px);
+  border-left: 2px dashed rgb(54 29 199 / 0.45);
+}
+
+.cvSection {
+  min-width: 0;
+}
+
+.cvList {
+  display: grid;
+  gap: 20px;
+}
+
+.cvList li {
+  position: relative;
+  display: grid;
+  padding-left: 24px;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.cvList li::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 4px;
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+
+.cvList strong {
+  font-weight: 600;
+}
+
+.cvPeriod {
+  color: var(--ink-muted);
+}
+
+.languages {
+  display: grid;
+  gap: 4px;
+  font-size: var(--text-sm);
+}
+
+.languages div {
+  display: flex;
+  gap: 8px;
+}
+
+.languages dd {
+  margin: 0;
+}
+
+.fullRow {
+  grid-column: 1 / -1;
+  margin-top: 28px;
+}
+
+@media (max-width: 760px) {
+  .curriculum {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+  }
+
+  .cvColumn + .cvColumn::before {
+    display: none;
+  }
+
+  .fullRow {
+    margin-top: 0;
+  }
+}

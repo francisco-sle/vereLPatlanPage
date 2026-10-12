@@ -1,0 +1,20 @@
+{
+  "$comment": "Source images (relative to Images/) mapped to output names. Run `npm run images` after adding entries. Thumbnails are written as <name>-thumb.webp next to <name>.webp in src/assets/images/.",
+  "images": [
+    { "source": "Portfolio.png", "name": "hero", "full": 1400, "thumb": false },
+    { "source": "profile picture.png", "name": "profile", "full": 720, "thumb": 120 },
+    { "source": "logo boba tea.jpg", "name": "cheemz-boba-tea" },
+    { "source": "Terapia Nutricional.jpg", "name": "terapia-nutricional" },
+    { "source": "Maneki Brew.png", "name": "maneki-brew" },
+    { "source": "Edgar Jugo Verde.jpg", "name": "edgar-jugo-verde" },
+    { "source": "Myriam Mapa.jpg", "name": "myriam-mapa" },
+    { "source": "Dev Aderezo Fritos.jpg", "name": "devoralia-frutos-rojos" },
+    { "source": "bibi muscilovs.jpg", "name": "nutribibi-musculo-grasa" },
+    { "source": "4julio.png", "name": "dia-cooperativas" },
+    { "source": "dia de la radio.png", "name": "dia-de-la-radio" },
+    { "source": "dia forestal.jpg", "name": "dia-forestal" },
+    { "source": "dia mundial de la rabia.png", "name": "dia-de-la-rabia" },
+    { "source": "buro de diseno.png", "name": "lucky-lapin" },
+    { "source": "Buró de diseño.png", "name": "beat-music" }
+  ]
+}

@@ -1,0 +1,204 @@
+.search {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  cursor: text;
+}
+
+.address {
+  max-width: 720px;
+}
+
+.icon {
+  position: absolute;
+  left: 14px;
+  z-index: 1;
+  font-size: 16px;
+  color: var(--ink);
+  opacity: 0.55;
+  pointer-events: none;
+  transition:
+    opacity var(--dur-med),
+    color var(--dur-med),
+    transform var(--dur-med) var(--ease-spring);
+}
+
+.search:focus-within .icon {
+  color: var(--accent);
+  opacity: 1;
+  transform: scale(1.15) rotate(-8deg);
+}
+
+.input {
+  width: 100%;
+  height: 38px;
+  padding: 0 38px 0 40px;
+  font-size: var(--text-sm);
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  outline: none;
+  appearance: none;
+  transition:
+    box-shadow var(--dur-med) var(--ease-out),
+    background-color var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out);
+}
+
+.input::placeholder {
+  transition:
+    opacity var(--dur-med),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.input:focus::placeholder {
+  opacity: 0.5;
+}
+
+.input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.input::placeholder {
+  color: var(--ink-muted);
+}
+
+/* The taskbar pill widens while in use. */
+.taskbar {
+  transition:
+    flex-basis 0.35s var(--ease-out),
+    max-width 0.35s var(--ease-out);
+}
+
+.input:focus-visible {
+  background: var(--white);
+  box-shadow: 0 0 0 4px rgb(255 113 245 / 0.35);
+}
+
+/* The white pill on the dark taskbar, as in the design. */
+.taskbar .input {
+  height: 40px;
+  background: var(--white);
+  border-color: transparent;
+  box-shadow: inset 0 2px 0 rgb(42 20 168 / 0.12);
+}
+
+.taskbar .input:focus-visible {
+  box-shadow: 0 0 0 3px var(--pink);
+}
+
+.clear {
+  position: absolute;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  font-size: 11px;
+  color: var(--ink);
+  border-radius: var(--radius-pill);
+}
+
+.clear:hover {
+  background: var(--ink-faint);
+}
+
+/* ---------- Results ---------- */
+
+.results {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  max-height: min(360px, 60vh);
+  padding: 6px;
+  overflow: auto;
+  color: var(--ink);
+  background: var(--white);
+  border: var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-hard), var(--shadow-pop);
+}
+
+.below {
+  top: calc(100% + 8px);
+}
+
+/* Clears the taskbar: the pill is vertically centered in it. */
+.above {
+  bottom: calc((var(--taskbar-h) - 100%) / 2 + 100% + 10px);
+  min-width: min(360px, calc(100vw - 24px));
+}
+
+.result {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 10px;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.highlight {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--pink);
+  border-radius: 8px;
+}
+
+.resultIcon {
+  flex-shrink: 0;
+  font-size: 18px;
+}
+
+.resultLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.resultDetail {
+  flex-shrink: 0;
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+}
+
+.noResults {
+  padding: 10px;
+  font-size: var(--text-sm);
+  color: var(--ink-muted);
+}
+
+@media (max-width: 760px), (max-height: 520px) {
+  .input {
+    height: 34px;
+    padding-right: 32px;
+    padding-left: 34px;
+  }
+
+  .taskbar .input {
+    height: 38px;
+  }
+
+  .icon {
+    left: 12px;
+  }
+
+  /* Full-width popup on small screens, docked above the taskbar. */
+  .above {
+    position: fixed;
+    right: 10px;
+    bottom: calc(var(--taskbar-h) + 10px);
+    left: 10px;
+    min-width: 0;
+  }
+}
