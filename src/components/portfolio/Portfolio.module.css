@@ -1,0 +1,334 @@
+.portfolio {
+  max-width: 1040px;
+  padding: clamp(14px, 3.5%, 40px) clamp(14px, 5%, 64px) 40px;
+  margin: 0 auto;
+}
+
+/* ---------- Filters ---------- */
+
+.filters {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.filter {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  height: 32px;
+  padding: 0 14px;
+  font-size: var(--text-sm);
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  transition:
+    background-color var(--dur-fast),
+    box-shadow var(--dur-fast),
+    transform var(--dur-fast);
+}
+
+.filter svg {
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.filter:hover {
+  background: var(--ink-faint);
+}
+
+.filter[aria-pressed="true"] {
+  background: var(--pink);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--white);
+  background: var(--ink);
+  border-radius: var(--radius-pill);
+}
+
+.emptyMessage {
+  padding: 48px 12px;
+  text-align: center;
+  color: var(--ink-muted);
+}
+
+/* ---------- Sections ---------- */
+
+.section + .section {
+  border-top: 2px solid var(--ink);
+}
+
+.section {
+  padding: 18px 0 22px;
+}
+
+.sectionHeading {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sectionToggle {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 4px 10px 4px 4px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--dur-fast);
+}
+
+.sectionToggle:hover {
+  background: var(--ink-faint);
+}
+
+.sectionToggle .count {
+  opacity: 0;
+  transition: opacity var(--dur-fast);
+}
+
+.sectionToggle:hover .count,
+.sectionToggle[aria-expanded="false"] .count {
+  opacity: 1;
+}
+
+.chevron {
+  font-size: 22px;
+  transform: rotate(90deg);
+  transition: transform var(--dur-med) var(--ease-out);
+}
+
+.sectionToggle[aria-expanded="false"] .chevron {
+  transform: rotate(0deg);
+}
+
+.collapse {
+  overflow: hidden;
+}
+
+/* ---------- Grid & cards ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-min), var(--card-max)));
+  gap: 26px 32px;
+  justify-content: center;
+  padding: 18px 6px 6px;
+}
+
+.grid-square {
+  --card-min: 150px;
+  --card-max: 200px;
+}
+
+.grid-portrait {
+  --card-min: 130px;
+  --card-max: 170px;
+}
+
+.grid-tall {
+  --card-min: 120px;
+  --card-max: 150px;
+}
+
+.grid-landscape {
+  --card-min: 180px;
+  --card-max: 230px;
+}
+
+.card {
+  position: relative;
+}
+
+.open,
+.placeholderCard {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.frame {
+  display: block;
+  overflow: hidden;
+  background: #fff;
+  box-shadow:
+    0 2px 0 rgb(42 20 168 / 0.08),
+    0 6px 14px -6px rgb(42 20 168 / 0.35);
+  transition:
+    transform var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.square {
+  aspect-ratio: 1;
+}
+
+.portrait {
+  aspect-ratio: 5 / 6;
+}
+
+.tall {
+  aspect-ratio: 2 / 3;
+}
+
+.landscape {
+  aspect-ratio: 1;
+}
+
+/* Website mockups read best from their top-left corner (logo & navigation). */
+.landscape img {
+  object-position: left top;
+}
+
+.open:hover .frame,
+.open:focus-visible .frame {
+  transform: translateY(-4px) rotate(-0.6deg);
+  box-shadow:
+    6px 6px 0 var(--ink),
+    0 16px 26px -10px rgb(42 20 168 / 0.45);
+}
+
+.open:hover .frame img {
+  transform: scale(1.04);
+}
+
+.open:active .frame {
+  transform: translateY(-1px);
+}
+
+.open:focus-visible {
+  outline: none;
+}
+
+.open:focus-visible .frame {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.caption {
+  display: grid;
+  font-size: var(--text-sm);
+  line-height: 1.35;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.caption time {
+  color: var(--ink-muted);
+}
+
+/* Favorite star: always visible on touch, revealed on hover elsewhere. */
+.star {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  font-size: 18px;
+  color: var(--ink);
+  background: rgb(255 255 255 / 0.92);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity var(--dur-fast),
+    transform var(--dur-med) var(--ease-spring),
+    background-color var(--dur-fast);
+}
+
+.card:hover .star,
+.star:focus-visible,
+.starOn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.star:hover {
+  background: var(--accent-soft);
+  transform: scale(1.1) rotate(-8deg);
+}
+
+.starOn {
+  color: var(--accent);
+}
+
+@media (hover: none) {
+  .star {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* "Coming soon" tile */
+.placeholder {
+  display: grid;
+  gap: 8px;
+  place-content: center;
+  justify-items: center;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background:
+    radial-gradient(circle at 20% 20%, rgb(255 255 255 / 0.9) 0 2px, transparent 3px) 0 0 / 22px 22px,
+    linear-gradient(135deg, var(--pink) 0%, var(--blue) 100%);
+  border: 2px dashed var(--ink);
+  box-shadow: none;
+}
+
+.placeholderIcon {
+  font-size: 30px;
+  color: var(--accent);
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+
+.placeholderCard .caption {
+  opacity: 0.75;
+}
+
+@keyframes twinkle {
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8) rotate(20deg);
+  }
+}
+
+@media (max-width: 760px) {
+  .grid {
+    gap: 20px 16px;
+  }
+
+  .grid-square,
+  .grid-landscape {
+    --card-min: 130px;
+    --card-max: 1fr;
+  }
+
+  .grid-portrait,
+  .grid-tall {
+    --card-min: 120px;
+    --card-max: 1fr;
+  }
+}

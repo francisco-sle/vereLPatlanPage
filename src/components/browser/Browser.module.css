@@ -1,0 +1,143 @@
+/* ---------- Tabs ---------- */
+
+.tabList {
+  display: flex;
+  flex: 1;
+  /* Bottom-align so inactive tabs touch the frame like the taller active tab. */
+  align-items: flex-end;
+  gap: 6px;
+  min-width: 0;
+}
+
+.tab {
+  position: relative;
+  z-index: 0;
+  flex: 0 1 290px;
+  min-width: 0;
+  height: 50px;
+  padding: 0 14px;
+  overflow: hidden;
+  font-size: var(--text-xl);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background: var(--pink-tab);
+  border: var(--border);
+  border-bottom: none;
+  border-radius: 30px 30px 0 0;
+  transform-origin: bottom;
+  transition:
+    background-color var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+
+.tab:hover:not(.tabActive) {
+  background: #e3b7e7;
+  transform: translateY(-2px);
+}
+
+.tab:focus-visible {
+  outline-offset: -6px;
+}
+
+/* The active tab sits on top of the frame's border so they look joined. */
+.tabActive {
+  z-index: 2;
+  height: 54px;
+  background: var(--pink);
+}
+
+/* ---------- Toolbar ---------- */
+
+.favoritesButton {
+  position: relative;
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 28px;
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--dur-fast),
+    transform var(--dur-fast) var(--ease-spring);
+}
+
+.favoritesButton:hover {
+  background: var(--ink-faint);
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.favoritesButton:active {
+  transform: scale(0.9);
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--accent);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+}
+
+/* ---------- Body ---------- */
+
+.body {
+  overflow: hidden;
+}
+
+.page {
+  height: 100%;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.credits {
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+.credits a {
+  text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+  transition: color var(--dur-fast);
+}
+
+.credits a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 760px), (max-height: 520px) {
+  .tabList {
+    gap: 4px;
+  }
+
+  .tab {
+    flex: 1 1 0;
+    height: 42px;
+    padding: 0 8px;
+    font-size: var(--text-sm);
+    border-radius: 18px 18px 0 0;
+  }
+
+  .tabActive {
+    height: 44px;
+  }
+
+  .tab:hover:not(.tabActive) {
+    transform: none;
+  }
+
+  .favoritesButton {
+    width: 34px;
+    font-size: 24px;
+  }
+}

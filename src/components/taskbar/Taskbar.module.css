@@ -1,0 +1,590 @@
+.taskbar {
+  position: relative;
+  z-index: 10000;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  flex-shrink: 0;
+  height: var(--taskbar-h);
+  padding: 0 clamp(12px, 2vw, 40px);
+  padding-bottom: env(safe-area-inset-bottom);
+  color: var(--white);
+  background: var(--taskbar);
+  border-top: 2px solid var(--ink-strong);
+  box-shadow: 0 -8px 24px -12px rgb(42 20 168 / 0.6);
+}
+
+/* ---------- Start ---------- */
+
+.start {
+  position: relative;
+}
+
+.startButton {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  font-size: 24px;
+  border-radius: 10px;
+  transition:
+    background-color var(--dur-fast),
+    transform var(--dur-fast) var(--ease-spring);
+}
+
+.startButton:hover,
+.startButton[aria-expanded="true"] {
+  background: rgb(255 255 255 / 0.14);
+}
+
+.startButton:active {
+  transform: scale(0.9);
+}
+
+.startButton svg {
+  transition: transform var(--dur-med) var(--ease-spring);
+}
+
+.startButton[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+
+/* ---------- Search + open windows ---------- */
+
+.workArea {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+
+/* The search only takes space the window buttons don't need (up to 300px). */
+.search {
+  flex: 1 1 150px;
+  min-width: 130px;
+  max-width: 300px;
+}
+
+.search:focus-within {
+  flex-basis: 400px;
+  max-width: 400px;
+}
+
+/* Open & minimized windows, styled as a translucent pill next to the search. */
+.tasks {
+  display: flex;
+  flex: 0 1 auto;
+  gap: 4px;
+  align-items: center;
+  min-width: 0;
+  height: 40px;
+  padding: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  background: rgb(255 255 255 / 0.14);
+  border: 2px solid rgb(255 255 255 / 0.22);
+  border-radius: var(--radius-pill);
+}
+
+.tasks:empty {
+  display: none;
+}
+
+.tasks::-webkit-scrollbar {
+  display: none;
+}
+
+/* Buttons shrink evenly (with ellipsis) when many windows are open. */
+.tasks li {
+  flex: 0 1 auto;
+  min-width: 38px;
+  overflow: hidden;
+}
+
+.task {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+  max-width: 132px;
+  height: 32px;
+  padding: 0 12px 0 10px;
+  font-size: var(--text-xs);
+  color: var(--white);
+  border-radius: var(--radius-pill);
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast),
+    opacity var(--dur-fast);
+}
+
+.task:hover {
+  background: rgb(255 255 255 / 0.16);
+}
+
+.task[data-active="true"] {
+  color: var(--ink);
+  background: var(--pink);
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.task[data-minimized="true"] {
+  opacity: 0.6;
+}
+
+.task[data-minimized="true"]::after {
+  content: "";
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  width: 14px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+.task:focus-visible {
+  outline-color: var(--pink);
+  outline-offset: -2px;
+}
+
+.taskIcon {
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.taskLabel {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ---------- Social ---------- */
+
+.social {
+  justify-self: center;
+}
+
+.socialList {
+  display: flex;
+  gap: clamp(10px, 1.8vw, 34px);
+}
+
+.socialLink {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  font-size: 34px;
+  border-radius: 12px;
+  transition:
+    transform var(--dur-med) var(--ease-spring),
+    color var(--dur-fast);
+}
+
+.socialLink:hover {
+  color: var(--pink);
+  transform: translateY(-3px) scale(1.08);
+}
+
+.socialLink:focus-visible {
+  outline-color: var(--pink);
+}
+
+/* ---------- Tray ---------- */
+
+.tray {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-self: end;
+}
+
+.divider {
+  width: 2px;
+  height: 40px;
+  background: var(--white);
+  opacity: 0.85;
+}
+
+.clock {
+  font-size: var(--text-md);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.trayButton {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+  border-radius: 10px;
+  transition:
+    background-color var(--dur-fast),
+    transform var(--dur-fast) var(--ease-spring);
+}
+
+.trayButton:hover {
+  background: rgb(255 255 255 / 0.14);
+}
+
+.trayButton:active {
+  transform: scale(0.88);
+}
+
+.trayButton[aria-pressed="false"] {
+  opacity: 0.7;
+}
+
+.trayButton:focus-visible {
+  outline-color: var(--pink);
+}
+
+.language {
+  display: flex;
+  padding: 3px;
+  background: rgb(255 255 255 / 0.12);
+  border-radius: var(--radius-pill);
+}
+
+.language button {
+  min-width: 34px;
+  height: 26px;
+  padding: 0 6px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  opacity: 0.75;
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast),
+    opacity var(--dur-fast);
+}
+
+.language button:hover {
+  opacity: 1;
+}
+
+.language button[aria-pressed="true"] {
+  color: var(--ink);
+  background: var(--pink);
+  opacity: 1;
+}
+
+.language button:focus-visible,
+.startButton:focus-visible {
+  outline-color: var(--pink);
+}
+
+/* ---------- Start menu ---------- */
+
+.startMenu {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  left: 0;
+  display: grid;
+  width: min(560px, calc(100vw - 24px));
+  max-height: calc(100dvh - var(--taskbar-h) - 28px);
+  overflow: hidden auto;
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-hard-strong), var(--shadow-pop);
+  transform-origin: bottom left;
+}
+
+.menuHeader {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 18px;
+  background: var(--pink);
+  border-bottom: var(--border);
+}
+
+.menuHeader img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border: var(--border);
+  border-radius: 50%;
+}
+
+.menuName {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.menuSubtitle {
+  font-size: var(--text-xs);
+  color: var(--ink-muted);
+}
+
+.menuColumns {
+  display: grid;
+  /* minmax(0, …) lets columns shrink below their longest label. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 12px;
+  padding: 10px;
+}
+
+.menuColumns > div {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.menuColumns [role="group"] {
+  display: grid;
+  gap: 0;
+}
+
+.menuHeading {
+  padding: 6px 10px 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.menuItem {
+  display: flex;
+  color: inherit;
+  text-decoration: none;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  min-height: 38px;
+  padding: 4px 10px;
+  font-size: var(--text-sm);
+  text-align: left;
+  border-radius: 8px;
+  transition: background-color var(--dur-fast);
+}
+
+.menuItem:hover,
+.menuItem:focus-visible {
+  background: var(--blue);
+  outline: none;
+}
+
+.menuIcon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 22px;
+  font-size: 18px;
+}
+
+/* Long labels (common in Spanish) wrap instead of being cut off. */
+.menuLabel {
+  flex: 1;
+  min-width: 0;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.menuCheck {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.menuThumb {
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+}
+
+.menuFooter {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  font-size: var(--text-xs);
+  color: var(--white);
+  background: var(--ink);
+}
+
+.menuSocials {
+  display: flex;
+  gap: 8px;
+}
+
+.menuSocial {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  font-size: 20px;
+  border-radius: 8px;
+  transition: background-color var(--dur-fast);
+}
+
+.menuSocial:hover,
+.menuSocial:focus-visible {
+  background: rgb(255 255 255 / 0.18);
+  outline: none;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+  .clockDate {
+    display: none;
+  }
+
+  .socialList {
+    gap: 12px;
+  }
+
+  .socialLink {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 760px), (max-height: 520px) {
+  .taskbar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 0 10px;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .social,
+  .divider,
+  .trayLanguage,
+  .trayButton {
+    display: none;
+  }
+
+  .startButton {
+    width: 42px;
+    height: 42px;
+    font-size: 21px;
+  }
+
+  .workArea {
+    gap: 6px;
+  }
+
+  .search {
+    flex: 1 1 0;
+    min-width: 90px;
+    max-width: none;
+  }
+
+  .tasks {
+    flex: 0 1 auto;
+    height: 38px;
+  }
+
+  .task {
+    padding: 0 9px;
+  }
+
+  .task .taskLabel {
+    display: none;
+  }
+
+  .clock {
+    font-size: var(--text-sm);
+  }
+
+  .startMenu {
+    position: fixed;
+    bottom: calc(var(--taskbar-h) + 8px);
+    left: 12px;
+  }
+
+  .menuColumns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Window previews ---------- */
+
+.preview {
+  position: fixed;
+  bottom: calc(var(--taskbar-h) + 12px);
+  z-index: 20000;
+  display: grid;
+  gap: 8px;
+  padding: 8px 10px 10px;
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-hard), var(--shadow-pop);
+  transform-origin: bottom center;
+}
+
+.previewHeader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: var(--text-xs);
+}
+
+.previewIcon {
+  flex-shrink: 0;
+  font-size: 15px;
+}
+
+.previewTitle {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.previewClose {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+  border-radius: 6px;
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast);
+}
+
+.previewClose:hover {
+  color: var(--white);
+  background: var(--accent);
+}
+
+.previewBody {
+  display: grid;
+  place-items: center;
+  min-height: 90px;
+  padding: 6px;
+  overflow: hidden;
+  background:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px) 0 0 / 14px 14px,
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px) 0 0 / 14px 14px,
+    var(--desk-top);
+  border-radius: 8px;
+  transition: box-shadow var(--dur-fast);
+}
+
+.previewBody:hover {
+  box-shadow: inset 0 0 0 3px var(--pink);
+}
+
+.snapshot {
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
