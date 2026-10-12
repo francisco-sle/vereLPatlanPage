@@ -1,5 +1,7 @@
 import { LazyMotion, MotionConfig } from "motion/react";
 import styles from "./App.module.css";
+import { seoRole } from "./config/seo";
+import { siteConfig } from "./config/site";
 import { Desktop } from "./components/desktop/Desktop";
 import { OverlayProvider } from "./components/overlays/OverlayProvider";
 import { Taskbar } from "./components/taskbar/Taskbar";
@@ -12,9 +14,12 @@ import { UserDataProvider } from "./os/UserDataProvider";
 const loadMotionFeatures = () => import("./lib/motionFeatures").then((module) => module.default);
 
 function Shell() {
-  const { t } = useI18n();
+  const { t, l } = useI18n();
   return (
     <div className={styles.app}>
+      <h1 className="visually-hidden">
+        {siteConfig.ownerName} · {l(seoRole)}
+      </h1>
       <a className={styles.skipLink} href="#desktop">
         {t("a11y.skip")}
       </a>
