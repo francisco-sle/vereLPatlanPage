@@ -14,21 +14,22 @@
       crossorigin
     />
     <link rel="preload" as="image" href="/src/assets/images/hero.webp" fetchpriority="high" />
-    <meta
-      name="description"
-      content="Verenice López — graphic designer & illustrator. A pastel retro desktop portfolio with branding, social advertising, illustration and web design work."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Vere L Patlan · Portfolio" />
-    <meta
-      property="og:description"
-      content="Graphic design, branding and illustration by Verenice López."
-    />
-    <title>Vere L Patlan</title>
+    <!-- Title, description, social and structured-data tags: scripts/seo-plugin.ts -->
+    <!--seo-->
   </head>
   <body>
     <div id="root"></div>
-    <noscript>This portfolio needs JavaScript enabled to run.</noscript>
+    <noscript>
+      <h1>Verenice López · Graphic Designer &amp; Illustrator</h1>
+      <p>
+        Portfolio of branding, social media advertising, illustration and web design work.
+        This site needs JavaScript enabled to run.
+      </p>
+      <nav>
+        <a href="/">Home</a> · <a href="/curriculum">Curriculum</a> ·
+        <a href="/portfolio">Portfolio</a>
+      </nav>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

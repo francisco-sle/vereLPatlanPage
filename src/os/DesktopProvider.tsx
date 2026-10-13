@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer, useRef, type ReactNode } from "react";
-import { siteConfig } from "../config/site";
+import { pageSeo } from "../config/seo";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { useI18n } from "../i18n/useI18n";
 import { STORAGE_KEYS, readStorage, writeStorage } from "../lib/storage";
@@ -16,7 +16,7 @@ import { companionIds } from "./windowConfig";
 
 const COMPACT_QUERY = "(max-width: 760px), (max-height: 520px)";
 
-/** Reads the tab from `/curriculum`, or from old `#/curriculum` hash links. */
+/** Reads the tab from `/curriculum`, or from old `#/curriculum` and `/home` links. */
 function tabFromLocation(): TabId | null {
   const hash = window.location.hash.replace(/^#\/?/, "");
   const path = window.location.pathname.replace(/^\/+|\/+$/g, "");
@@ -47,7 +47,7 @@ function createInitialState(): DesktopState {
 export function DesktopProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(desktopReducer, undefined, createInitialState);
   const isCompact = useMediaQuery(COMPACT_QUERY);
-  const { t } = useI18n();
+  const { lang } = useI18n();
 
   const stateRef = useRef(state);
   const compactRef = useRef(isCompact);
@@ -86,7 +86,7 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
   const browserOpen = state.windows.browser.open;
   useEffect(() => {
     if (!browserOpen && !isFirstSync.current) return;
-    const path = `/${state.activeTab}`;
+    const path = pageSeo[state.activeTab].path;
     const url = new URL(window.location.href);
     if (url.pathname !== path || url.hash) {
       const method = isFirstSync.current ? "replaceState" : "pushState";
@@ -107,8 +107,8 @@ export function DesktopProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    document.title = `${t(`tab.${state.activeTab}`)} · ${siteConfig.siteName}`;
-  }, [state.activeTab, t]);
+    document.title = pageSeo[state.activeTab].title[lang];
+  }, [state.activeTab, lang]);
 
   // Every action plays its retro sound, chosen from the state it acts on.
   const actions = useMemo<DesktopActions>(() => {

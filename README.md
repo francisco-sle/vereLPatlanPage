@@ -20,9 +20,21 @@ npm run lint
 ## Deploying to Vercel
 
 Import the repository in Vercel. It detects Vite automatically, and `vercel.json`
-already sets the build command, output directory, SPA rewrites (so `/portfolio` and the other
-page URLs work on refresh) and long-term caching for hashed assets. Each push to
-`main` deploys to production, and other branches get preview URLs.
+already sets the build command, output directory, clean page URLs (`/curriculum`, `/portfolio`)
+and long-term caching for hashed assets. Each push to `main` deploys to production, and other
+branches get preview URLs.
+
+## SEO
+
+The build (`scripts/seo-plugin.ts`) writes a separate HTML file for each page, each with its own
+title, description, canonical URL, Open Graph/Twitter tags and (on the home page) schema.org
+structured data. It also writes `robots.txt`, `sitemap.xml` and a `noindex` `404.html`.
+
+Canonical URLs, the share image and the sitemap need the site's public address. On Vercel it
+defaults to the project's production domain. To use another domain, set the `SITE_URL`
+environment variable (e.g. `https://verelpatlan.com`). Without it the build skips those tags and
+prints a warning. The share image (`public/og-image.png`) is generated from the hero art with
+`npm run og-image`.
 
 ## Editing content
 
@@ -33,6 +45,7 @@ page URLs work on refresh) and long-term caching for hashed assets. Each push to
 | Curriculum (experience, education, courses, languages) | `src/content/curriculum.ts` |
 | Software skills & levels | `src/content/skills.ts` |
 | About text, hero & profile images | `src/content/about.ts` |
+| Page titles & descriptions for search engines and link previews | `src/config/seo.ts` |
 | UI text (English / Spanish) | `src/i18n/translations.ts` |
 | Default window positions & sizes | `src/os/windowConfig.ts` |
 | Sound effects (notes, volume) | `src/sound/sound.ts` |

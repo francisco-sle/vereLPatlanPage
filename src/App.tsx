@@ -1,5 +1,7 @@
 import { LazyMotion, MotionConfig } from "motion/react";
 import styles from "./App.module.css";
+import { seoRole } from "./config/seo";
+import { siteConfig } from "./config/site";
 import { Desktop } from "./components/desktop/Desktop";
 import { OverlayProvider } from "./components/overlays/OverlayProvider";
 import { StartupScreen } from "./components/startup/StartupScreen";
@@ -14,12 +16,15 @@ import { useLoggedIn } from "./os/session";
 const loadMotionFeatures = () => import("./lib/motionFeatures").then((module) => module.default);
 
 function Shell() {
-  const { t } = useI18n();
+  const { t, l } = useI18n();
   const loggedIn = useLoggedIn();
   return (
     <>
       {/* The desktop loads behind the startup screen, but can't be reached until log-in. */}
       <div className={styles.app} inert={!loggedIn}>
+        <h1 className="visually-hidden">
+          {siteConfig.ownerName} · {l(seoRole)}
+        </h1>
         <a className={styles.skipLink} href="#desktop">
           {t("a11y.skip")}
         </a>
