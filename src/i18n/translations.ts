@@ -106,6 +106,18 @@ const en = {
   "hint.body":
     "Click a folder to open it. Drag windows by their title bar, resize them from the edges, and use the taskbar to bring back minimized windows.",
   "hint.dismiss": "Got it",
+
+  // Boot & welcome screens
+  "boot.starting": "Starting up…",
+  "boot.edition": "Portfolio Edition",
+  "boot.copyright": "Copyright © {year} {name}",
+  "login.begin": "To begin, click the user name",
+  "login.loading": "Loading your personal settings…",
+  "login.welcome": "welcome",
+  "login.loggingOff": "Logging off…",
+  "login.restart": "Restart",
+  "login.tip": "After you log on, open the folders on the desktop to explore my work.",
+  "start.logOff": "Log off",
   "menu.emailMe": "Send me an email",
   "menu.emailWith": "Email me with {service}",
   "menu.copyEmail": "Copy email address",
@@ -217,6 +229,17 @@ const es: Record<TranslationKey, string> = {
   "hint.body":
     "Haz clic en una carpeta para abrirla. Arrastra las ventanas desde su barra de título, cambia su tamaño desde los bordes y usa la barra de tareas para recuperar las ventanas minimizadas.",
   "hint.dismiss": "Entendido",
+
+  "boot.starting": "Iniciando…",
+  "boot.edition": "Edición Portafolio",
+  "boot.copyright": "Copyright © {year} {name}",
+  "login.begin": "Para comenzar, haz clic en el nombre de usuario",
+  "login.loading": "Cargando tu configuración personal…",
+  "login.welcome": "bienvenid@",
+  "login.loggingOff": "Cerrando sesión…",
+  "login.restart": "Reiniciar",
+  "login.tip": "Después de iniciar sesión, abre las carpetas del escritorio para explorar mi trabajo.",
+  "start.logOff": "Cerrar sesión",
   "menu.emailMe": "Envíame un correo",
   "menu.emailWith": "Escríbeme con {service}",
   "menu.copyEmail": "Copiar dirección de correo",

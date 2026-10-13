@@ -176,6 +176,13 @@ export const ResetIcon = (props: IconProps) => (
   </svg>
 );
 
+export const PowerIcon = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" {...strokeBase(props)}>
+    <path d="M12 3v8" />
+    <path d="M6.3 6.8a8 8 0 1 0 11.4 0" />
+  </svg>
+);
+
 export const SoundOnIcon = (props: IconProps) => (
   <svg viewBox="0 0 24 24" {...strokeBase(props)}>
     <path d="M4 9h4l5-4v14l-5-4H4V9Z" fill="currentColor" />
