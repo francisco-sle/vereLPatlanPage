@@ -15,7 +15,9 @@ export type SoundName =
   | "menu"
   | "star"
   | "unstar"
-  | "notify";
+  | "notify"
+  | "startup"
+  | "logoff";
 
 interface Note {
   /** Frequency in Hz; `to` glides towards another frequency. */
@@ -29,6 +31,7 @@ interface Note {
 }
 
 // Note frequencies (Hz)
+const C4 = 261.63, G4 = 392;
 const C5 = 523.25, E5 = 659.25, G5 = 783.99, A5 = 880, B5 = 987.77;
 const C6 = 1046.5, D6 = 1174.66, E6 = 1318.51, G6 = 1567.98;
 
@@ -67,6 +70,21 @@ const SOUNDS: Record<SoundName, Note[]> = {
   notify: [
     { freq: A5, at: 0, dur: 0.35, wave: "sine" },
     { freq: E6, at: 0.12, dur: 0.5, wave: "sine", gain: 0.35 },
+  ],
+  // A slow, swelling chord, like an old OS greeting you after logging in.
+  startup: [
+    { freq: C4, at: 0, dur: 2.2, wave: "sine", gain: 0.3 },
+    { freq: G4, at: 0.12, dur: 2, wave: "sine", gain: 0.25 },
+    { freq: E5, at: 0.24, dur: 1.8, wave: "triangle", gain: 0.3 },
+    { freq: G5, at: 0.4, dur: 1.6, wave: "triangle", gain: 0.25 },
+    { freq: C6, at: 0.56, dur: 1.5, wave: "sine", gain: 0.3 },
+    { freq: E6, at: 0.72, dur: 1.4, wave: "sine", gain: 0.18 },
+  ],
+  logoff: [
+    { freq: C6, at: 0, dur: 0.5, wave: "sine", gain: 0.3 },
+    { freq: G5, at: 0.14, dur: 0.6, wave: "sine", gain: 0.3 },
+    { freq: E5, at: 0.28, dur: 0.7, wave: "triangle", gain: 0.3 },
+    { freq: C5, at: 0.42, dur: 1, wave: "sine", gain: 0.3 },
   ],
 };
 

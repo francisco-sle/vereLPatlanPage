@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { usePersistentState } from "../../hooks/usePersistentState";
 import { useI18n } from "../../i18n/useI18n";
 import { STORAGE_KEYS } from "../../lib/storage";
+import { useLoggedIn } from "../../os/session";
 import { playSound } from "../../sound/sound";
 import { Button } from "../ui/Button";
 import { SparkleIcon } from "../ui/Icons";
@@ -19,19 +20,21 @@ export function WelcomeHint() {
     isBoolean,
   );
   const [ready, setReady] = useState(false);
+  // Wait until the visitor is past the startup screen.
+  const loggedIn = useLoggedIn();
 
   useEffect(() => {
-    if (dismissed) return;
+    if (dismissed || !loggedIn) return;
     const timeout = window.setTimeout(() => {
       setReady(true);
       playSound("notify", { passive: true });
     }, 1400);
     return () => window.clearTimeout(timeout);
-  }, [dismissed]);
+  }, [dismissed, loggedIn]);
 
   return (
     <AnimatePresence>
-      {ready && !dismissed && (
+      {ready && loggedIn && !dismissed && (
         <m.aside
           className={styles.hint}
           role="status"

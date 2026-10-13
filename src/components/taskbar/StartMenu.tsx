@@ -12,13 +12,15 @@ import { useDesktop } from "../../os/DesktopContext";
 import { useUserData } from "../../os/UserDataContext";
 import { useOpenProject } from "../../os/useOpenProject";
 import { TAB_IDS, type WindowId } from "../../os/types";
+import { logOff } from "../../os/session";
 import { windowConfig } from "../../os/windowConfig";
-import { setSoundEnabled } from "../../sound/sound";
+import { playSound, setSoundEnabled } from "../../sound/sound";
 import { useSoundEnabled } from "../../sound/useSoundEnabled";
 import {
   FolderIcon,
   LanguageIcon,
   MailIcon,
+  PowerIcon,
   ResetIcon,
   SoundOffIcon,
   SoundOnIcon,
@@ -196,6 +198,10 @@ export function StartMenu({ onClose, anchor }: Props) {
             </button>
             {item("reset", <ResetIcon />, t("start.resetLayout"), resetLayout)}
             {item("reset-all", <TrashIcon />, t("menu.resetAll"), resetAll)}
+            {item("log-off", <PowerIcon />, t("start.logOff"), () => {
+              playSound("logoff");
+              logOff();
+            })}
           </div>
         </div>
       </div>
